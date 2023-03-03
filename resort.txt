@@ -1,0 +1,112 @@
+create database Resort;
+use Resort;
+
+create table Usuario(
+Id_usuario int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR (50) NOT NULL,
+Apellido1 VARCHAR (50) NOT NULL,
+Apellido2 VARCHAR (50),
+Fecha_nacimiento Date,
+Correo VARCHAR (50) NOT NULL,
+Telefono VARCHAR (10) NOT NULL,
+Contrasena VARCHAR (50) NOT NULL,
+Tipo INT NOT NULL
+);
+
+create table Socio(
+Id_socio int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre_empresa VARCHAR (50) NOT NULL,
+Nombre VARCHAR (50) NOT NULL,
+Apellido1 VARCHAR (50) NOT NULL,
+Apellido2 VARCHAR (50),
+Titulo VARCHAR (50) NOT NULL,
+Correo VARCHAR (50) NOT NULL,
+Telefono VARCHAR (10) NOT NULL,
+Puesto VARCHAR (50) NOT NULL,
+Establecimiento VARCHAR (50) NOT NULL,
+Calle VARCHAR (50) NOT NULL,
+Num_ext VARCHAR (5) NOT NULL,
+Num_int VARCHAR (5) NOT NULL,
+Colonia VARCHAR (50) NOT NULL,
+Cp VARCHAR (5) NOT NULL,
+Estado VARCHAR (50) NOT NULL,
+Tipo INT NOT NULL
+);
+
+create table Habitacion(
+Id_habitacion int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Tipo VARCHAR (30) NOT NULL,
+Descripcion VARCHAR (100) NOT NULL,
+Precio FLOAT NOT NULL,
+Id_socio INT NOT NULL,
+FOREIGN KEY (Id_socio) REFERENCES Socio(Id_socio)
+);
+
+create table Imagenes(
+Id_imagen int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Id_habitacion INT NOT NULL,
+Ruta Varchar(100) NOT NULL,
+FOREIGN KEY (Id_habitacion) REFERENCES Habitacion(Id_habitacion)
+);
+
+create table Reservacion(
+Id_usuario INT NOT NULL,
+Id_habitacion INT NOT NULL,
+Fh_registro Timestamp NOT NULL,
+Fh_ingreso Datetime,
+Fh_salida Datetime,
+Fh_vencimiento Datetime,
+PRIMARY KEY (Id_usuario, Id_habitacion),
+FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario),
+FOREIGN KEY (Id_habitacion) REFERENCES Habitacion(Id_habitacion)
+);
+
+
+INSERT INTO usuario(Nombre, Apellido1, Apellido2, Fecha_nacimiento, Correo, Telefono, Contrasena, Tipo) VALUES ('Diana','Ruiz','Esparza','2000-01-15','2119200695@soy.utj.edu.mx','3310699427','2119200695','1');
+INSERT INTO usuario(Nombre, Apellido1, Apellido2, Fecha_nacimiento, Correo, Telefono, Contrasena, Tipo) VALUES ('Jessica Lizbeth','Ruiz','Esparza','1993-03-30','jessica@gmail.com','3339641275','2119200695','1');
+INSERT INTO usuario(Nombre, Apellido1, Apellido2, Fecha_nacimiento, Correo, Telefono, Contrasena, Tipo) VALUES ('Andrade','Sanjuan','Lourdes Yasmin','1991-06-12','2119100548@soy.utj.edu.mx','3333223224','2119100548','1');
+INSERT INTO usuario(Nombre, Apellido1, Apellido2, Fecha_nacimiento, Correo, Telefono, Contrasena, Tipo) VALUES ('Giovanni','Sosa','García','2000-01-15','2119100344@soy.utj.edu.mx','3326036684','2119100344','1');
+INSERT INTO usuario(Nombre, Apellido1, Apellido2, Fecha_nacimiento, Correo, Telefono, Contrasena, Tipo) VALUES ('Manuel','Angel','Martínez','2000-01-15','2119300459@soy.utj.edu.mx','3312396366','2119300459','1');
+
+INSERT INTO socio(Nombre_empresa, Nombre, Apellido1, Apellido2, Titulo, Correo, Telefono, Puesto, Establecimiento, Calle, Num_ext, Num_int, Colonia, Cp, Estado, Tipo) VALUES ('Hotel Aquiles','Luciana','Gutierrez','Ruiz','Srta','lucianagtz99@gmail.com','3331727381','Gerente','Establecimiento GDL','Aquiles Sérdan','152','','Oblatos','44700','Jalisco','2');
+INSERT INTO socio(Nombre_empresa, Nombre, Apellido1, Apellido2, Titulo, Correo, Telefono, Puesto, Establecimiento, Calle, Num_ext, Num_int, Colonia, Cp, Estado, Tipo) VALUES ('Motel Primavera','Genesis','Sosa','Martínez','Srta','genesissm99@gmail.com','3339842516','Director','Establecimiento GDL','Ignacio L. Vallarta','6110','','Granja','45017','Jalisco','2');
+INSERT INTO socio(Nombre_empresa, Nombre, Apellido1, Apellido2, Titulo, Correo, Telefono, Puesto, Establecimiento, Calle, Num_ext, Num_int, Colonia, Cp, Estado, Tipo) VALUES ('Motel Okura Villas y Suites','José Luis','Andrade','López','Sr','joseluisandrade66@gmail.com','3391738246','Gerente','Establecimiento GDL','Federalismo','1279','','Mezquitan','44260','Jalisco','2');
+INSERT INTO socio(Nombre_empresa, Nombre, Apellido1, Apellido2, Titulo, Correo, Telefono, Puesto, Establecimiento, Calle, Num_ext, Num_int, Colonia, Cp, Estado, Tipo) VALUES ('Best Western Plus Gran Hotel Centro Historico','Jorge','Almaraz','Contreras','Sr','Jorgealmaraz22@gmail.com','3350917382','Gerente','Establecimiento GDL','Calzada Independencia Sur','168','','Guadalajara Centro','44100','Jalisco','2');
+INSERT INTO socio(Nombre_empresa, Nombre, Apellido1, Apellido2, Titulo, Correo, Telefono, Puesto, Establecimiento, Calle, Num_ext, Num_int, Colonia, Cp, Estado, Tipo) VALUES ('Casa Habitas','Luciana','Gutierrez','Ruiz','Srta','lucianagtz99@gmail.com','3331727381','Gerente','Establecimiento GDL','Lerdo de tejeda','2308','','Americana,','44150','Jalisco','2');
+
+INSERT INTO habitacion(Tipo, Descripcion, Precio, Id_socio) VALUES ('Habitación Estándar - Cama extragrande','Artículos de higiene gratis Inodoro Tina o regadera Toallas Ropa de cama Piso de baldosa/mármol Mosquitero Teléfono Habitación(es) comunicada(s) disponible(s) Toallas/sábanas (por un cargo extra) Canales por cable Servicio de despertador Armario o closet Toda la unidad está situada en la planta baja Perchero para ropa Papel de baño',552,1);
+INSERT INTO habitacion(Tipo, Descripcion, Precio, Id_socio) VALUES ('Habitación Doble','Artículos de higiene gratis Inodoro Tina o regadera Toallas Ropa de cama Enchufe cerca de la cama Piso de baldosa/mármol Zona de estar TV Pantuflas Teléfono Canales vía satélite Radio Secadora de cabello Servicio de despertador Mesa de comedor Papel de baño Sofá cama Desinfectante de manos Habitación individual con aire acondicionado',500,2);
+INSERT INTO habitacion(Tipo, Descripcion, Precio, Id_socio) VALUES ('Suite Deluxe','Artículos de higiene gratis Inodoro Tina o regadera Pantuflas Teléfono Canales vía satélite Radio Comedor Perchero para ropa Papel de baño',592,3);
+INSERT INTO habitacion(Tipo, Descripcion, Precio, Id_socio) VALUES ('Habitación Estándar para no fumadores - 2 camas dobles
+','Caja fuerte Toallas Escritorio Teléfono Utensilios de planchado Tetera/cafetera Plancha Secadora de cabello Canales por cable Servicio de despertador Despertador Papel de baño',1345,4);
+INSERT INTO habitacion(Tipo, Descripcion, Precio, Id_socio) VALUES ('Habitación con cama grande y balcón','Acceso a pisos superiores en ascensor
+Acceso a pisos superiores solo mediante escaleras
+Ropa de cama
+Armario
+Desinfectante de manos
+Minibar
+Aire acondicionado
+Caja fuerte
+Suelo de baldosa / mármol
+Plancha para pantalones
+Plancha para ropa
+Productos de limpieza
+Secadora de ropa
+Zona de estar
+TV
+Teléfono
+TV de pantalla plana
+Canales por cable
+Balcón
+Patio
+Enchufe cerca de la cama
+Perchero
+Servicio de despertador / alarma
+Servicio de despertador
+Acceso al salón executive',5561,5);
+
+INSERT INTO reservacion(Id_usuario, Id_habitacion, Fh_registro, Fh_ingreso, Fh_salida, Fh_vencimiento) VALUES ('1','2','',null,null,null);
+INSERT INTO reservacion(Id_usuario, Id_habitacion, Fh_registro, Fh_ingreso, Fh_salida, Fh_vencimiento) VALUES ('2','1','',null,null,null);
+INSERT INTO reservacion(Id_usuario, Id_habitacion, Fh_registro, Fh_ingreso, Fh_salida, Fh_vencimiento) VALUES ('3','4','',null,null,null);
+INSERT INTO reservacion(Id_usuario, Id_habitacion, Fh_registro, Fh_ingreso, Fh_salida, Fh_vencimiento) VALUES ('4','3','',null,null,null);
+INSERT INTO reservacion(Id_usuario, Id_habitacion, Fh_registro, Fh_ingreso, Fh_salida, Fh_vencimiento) VALUES ('5','1','',null,null,null);
