@@ -1,0 +1,47 @@
+package com.example.maps_2
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+
+class MainActivity : AppCompatActivity(), OnMapReadyCallback{
+
+    private lateinit var map:GoogleMap
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        createFragment()
+    }
+//creara el map
+    private fun createFragment() {
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+    }
+//este metodo se llama cuando el map a sido cargado
+    override fun onMapReady(googleMap: GoogleMap) {
+        map =  googleMap
+        createMarker()
+    }
+//encargado de crear un marker
+    private fun createMarker() {
+        val coordinate = LatLng(20.628212, -103.370099)
+        val marker = MarkerOptions().position(coordinate).title("Casa de mama de gio")
+        map.addMarker(marker)
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(coordinate, 18f),
+            4000,
+            null
+        )
+
+    }
+
+
+}
